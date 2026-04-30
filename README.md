@@ -2,9 +2,6 @@
 
 A dynamic travel agency web application built with **PHP**, **MySQL**, **HTML/CSS/JS**, and the **Mistral AI** and **Pixabay** APIs.  
 Users can describe their dream trip in natural language and receive a completely AI-generated, personalized travel suggestion.
-
-![GitHub repo size](https://img.shields.io/github/repo-size/ton-utilisateur/evasion-ai-travel-planner)
-![GitHub last commit](https://img.shields.io/github/last-commit/ton-utilisateur/evasion-ai-travel-planner)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## ✨ Features
