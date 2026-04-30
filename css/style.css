@@ -1,0 +1,1681 @@
+/* RESET & FONTS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-blue: #1C8CB7; /* Bleu des boutons */
+    --dark-text: #222;
+    --light-text: #777;
+    --bg-light: #e6e6e6;
+    --bg-cream: #FAF9F4; /* Fond section IA */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-text);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif; /* Look "Magazine" des images */
+}
+
+a { text-decoration: none; color: inherit; }
+li { list-style: none; }
+
+/* UTILITIES */
+.section-padding { padding: 80px 10%; }
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+.btn-blue {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease; /* J'ai juste ajouté "all ... ease" pour que l'ombre apparaisse en douceur */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Le nouvel effet de brillance au survol */
+.btn-blue:hover {
+    opacity: 1; /* On remet l'opacité à 1 pour que la couleur reste bien vive avec la lumière */
+    
+    /* L'effet halo : on utilise une version semi-transparente de ton --primary-blue (#1C8CB7) */
+    box-shadow: 0 0 15px rgba(28, 140, 183, 0.6);
+    
+    /* Optionnel mais sympa : le bouton remonte d'un millimètre vers le haut */
+    transform: translateY(-2px);
+}
+.btn-blue:hover { opacity: 0.9; }
+
+/* HERO SECTION */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding-top: 30px;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { color: #fff; font-size: 14px; font-weight: 400; }
+
+.hero-content {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 5rem;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* --- CONTAINER GLOBAL --- */
+.search-container {
+    position: absolute;
+    bottom: 8%; /* Ajustez selon la hauteur de votre image */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Important pour aligner les onglets à gauche */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- PARTIE HAUTE : ONGLETS (Effet Translucide) --- */
+.search-tabs {
+    background: rgba(255, 255, 255, 0.35); /* Blanc transparent */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3); 	/* Effet de flou derrière */
+    padding: 10px 25px 0px 25px; /* Padding bas à 0 pour coller à la bulle du dessous */
+    border-radius: 20px 20px 0 0; /* Arrondi seulement en haut */
+    display: flex;
+    gap: 15px;
+    height: 50px; /* Hauteur fixe pour alignement */
+    align-items: center;
+}
+
+.search-tabs button {
+    background: transparent;
+    border: none;
+    color: #ffffff; /* Texte gris foncé pour lisibilité */
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+/* Le bouton actif (Vol) en Bleu Pillule */
+.search-tabs button.active {
+    background-color: #1C8CB7; /* Bleu du design */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(28, 140, 183, 0.3);
+}
+
+.search-tabs button i {
+    font-size: 14px;
+}
+
+/* --- PARTIE BASSE : INPUTS (Grosse Bulle Blanche) --- */
+.search-inputs-bubble {
+    background: rgba(255, 255, 255, 0.35); /* Même transparence que le haut */
+    backdrop-filter: blur(10px); /* Le flou magique */
+    -webkit-backdrop-filter: blur(10px); /* Important pour que ça marche sur iPhone/Safari */
+    
+    width: 100%;
+    padding: 25px 40px;
+    border-radius: 0 30px 30px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    
+    /* J'ajoute une toute petite bordure blanche semi-transparente 
+       pour que la bulle ressorte mieux sur les zones sombres de l'image */
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+/* Style des groupes de texte */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1; /* Prend l'espace disponible */
+    padding: 0 10px;
+}
+
+.input-group label {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f5f5f5;
+}
+
+.sub-text {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: 400;
+}
+
+/* --- LES SÉPARATEURS (Cercles gris avec icônes) --- */
+.separator-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #F2F4F6; /* Gris très clair */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 14px;
+    margin: 0 15px; /* Espace autour du cercle */
+}
+
+/* La petite ligne verticale entre Destination et Date */
+.vertical-divider {
+    width: 1px;
+    height: 40px;
+    background-color: #eee;
+    margin: 0 30px;
+}
+
+body.no-scroll {
+    overflow: hidden !important;
+}
+
+/* Ajustement Mobile (Responsive) */
+@media (max-width: 768px) {
+    .search-inputs-bubble {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+        border-radius: 20px;
+    }
+	.input-group {
+    border-right: none !important; /* Le !important force la suppression du trait */
+}
+    .vertical-divider { display: none; }
+    .separator-icon { align-self: center; transform: rotate(90deg); }
+    .search-tabs { width: 100%; justify-content: space-between; font-size: 12px; }
+}
+
+.input-group { flex: 1; border-right: 1px solid #eee; padding-right: 20px; }
+.input-group:last-child { border: none; }
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    color: #e3e3e3;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    font-weight: 600;
+    color: var(--dark-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* OFFERS */
+.offers { margin-top: 80px; }
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Animation fluide */
+}
+
+.card h3 { margin-bottom: 15px; font-family: 'Poppins', sans-serif; font-weight: 600; }
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* --- Le nouveau "masque" pour bloquer le débordement --- */
+.image-wrapper {
+    border-radius: 20px;
+    overflow: hidden; /* C'est le secret : tout ce qui dépasse est caché ! */
+    margin-bottom: 15px;
+}
+
+/* --- L'image en elle-même --- */
+.card-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin-bottom: 0; /* Le margin est maintenant géré par le wrapper */
+    transition: transform 0.5s ease; /* Animation du zoom */
+}
+
+/* --- NOUVEAU : Applique le zoom quand la souris survole la carte entière --- */
+.card:hover .card-image {
+    transform: scale(1.05); /* Grossit l'image de 5% */
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #888;
+}
+
+.tag {
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.tag.chill { background: #E0F2F1; color: #00695C; }
+.tag.relax { background: #FCE4EC; color: #AD1457; }
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price { font-weight: 700; font-size: 1.2rem; }
+.price small { font-size: 0.8rem; font-weight: 400; color: #999; }
+
+/* AI AGENT */
+.ai-agent {
+    background-color: var(--bg-cream);
+    padding: 80px 10%;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.ai-illustration {
+    max-width: 400px;
+    margin-bottom: 50px;
+    mix-blend-mode: multiply; 
+    transition: transform 0.1s ease-out; /* Assure la fluidité du mouvement */
+    will-change: transform; 
+}
+.ai-content h2 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+.ai-content p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.btn-wide-blue {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 15px 60px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* DESTINATIONS */
+.dest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.dest-header p { max-width: 250px; font-size: 14px; color: #777; }
+
+.slider-controls button {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #ddd;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.slider-controls button.active { background: var(--primary-blue); }
+
+.dest-grid {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.dest-card {
+    flex: 1;
+    height: 350px;
+    border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.dest-card::after {
+    content: '';
+    position: absolute;
+    bottom:0; width: 100%; height: 50%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    border-radius: 0 0 30px 30px;
+}
+
+.dest-card span {
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* BLOG */
+.blog-item {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+.blog-item img {
+    width: 50%;
+    border-radius: 30px;
+}
+
+.blog-text { width: 50%; }
+.blog-text h3 { margin-bottom: 20px; font-size: 1.5rem; }
+.blog-text p { color: #777; margin-bottom: 20px; line-height: 1.6; }
+/* --- LE LIEN "LIRE PLUS" --- */
+
+/* 1. Le style de base du lien */
+.read-more {
+    font-weight: 700;
+    color: var(--dark-text);
+    font-size: 14px;
+    text-decoration: none; /* On s'assure qu'il n'y a pas de soulignement */
+    
+    /* Pour bien aligner la flèche et le texte */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espace entre la flèche et le texte */
+
+    cursor: pointer; /* Force le curseur en main (déjà le cas par défaut sur un <a>, mais c'est plus sûr) */
+    transition: transform 0.3s ease, color 0.3s ease; /* Transition douce pour le mouvement et la couleur */
+}
+
+/* 2. Préparation de l'icône (la flèche) pour son animation */
+.read-more i {
+    transition: transform 0.3s ease; /* La flèche doit aussi avoir sa propre transition */
+}
+
+/* --- LES EFFETS AU SURVOL (HOVER) --- */
+
+/* 3. Quand on survole le lien entier */
+.read-more:hover {
+    /* Tout le bloc (texte + flèche) se décale de 5px vers la droite */
+    transform: translateX(5px);
+    /* OPTIONNEL : Je te propose aussi de changer la couleur en bleu, c'est souvent plus joli ! */
+    /* Si tu ne veux pas que ça change de couleur, supprime la ligne ci-dessous */
+    color: var(--primary-blue);
+}
+
+/* 4. Quand on survole le lien, on cible SPÉCIFIQUEMENT l'icône à l'intérieur */
+.read-more:hover i {
+    /* La flèche grossit de 20% (scale 1.2) */
+    transform: scale(1.2);
+}
+.blog-item.reverse { flex-direction: row-reverse; }
+
+/* TESTIMONIALS */
+.testi-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.testi-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    flex: 1;
+    
+    /* --- NOUVEAU : Ajout de la transition pour un effet fluide --- */
+    transition: all 0.5s ease;
+}
+
+.testi-card.fade { opacity: 0.5; transform: scale(0.9); }
+.testi-card.main { transform: scale(1.1); z-index: 2; border: 1px solid #eee; }
+
+.avatar img {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: -50px; /* Effet pop-out */
+    border: 4px solid white;
+}
+
+.testi-card h4 { margin: 15px 0 10px; font-size: 14px; }
+.testi-card p { font-size: 12px; color: #777; }
+
+.dots { text-align: center; margin-top: 40px; }
+.dots span {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+.dots span.active { background: var(--primary-blue); width: 20px; border-radius: 10px; }
+
+/* REGISTER BANNER */
+.register-banner {
+    background: url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #222;
+    position: relative;
+}
+.register-banner h2 { font-size: 2rem; margin-bottom: 20px; }
+
+/* FOOTER */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 80px 10%;
+    background: #fff;
+    font-size: 14px;
+}
+
+.footer-col h4 { margin-bottom: 20px; font-weight: 700; }
+.footer-col p, .footer-col li { color: #666; margin-bottom: 10px; cursor: pointer; }
+
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 150px;
+}
+.insta-grid img { width: 100%; border-radius: 5px; }
+
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+.full-width { width: 100%; }
+
+/* --- GESTION DES ONGLETS (TABS) --- */
+
+/* Modification de la bulle principale pour qu'elle s'adapte à son contenu */
+.search-inputs-bubble {
+    display: block; /* On remplace flex par block pour que les tabs gèrent le layout */
+}
+
+/* Style de base pour cacher les contenus */
+.tab-content {
+    display: none;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Classe ajoutée via JS pour afficher le contenu actif */
+.tab-content.active-content {
+    display: flex;
+}
+
+/* Petite animation d'apparition douce */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- SECTION "FAITES-MOI DÉCOUVRIR" --- */
+
+.discover-content {
+    gap: 20px;
+}
+
+.discover-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.2); /* Fond translucide comme la bulle */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 18px 25px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.discover-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.discover-input:focus {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.discover-btn {
+    white-space: nowrap; /* Empêche le bouton de se couper sur 2 lignes */
+    padding: 15px 35px;
+    font-size: 16px;
+}
+
+/* Ajustements responsives pour ces nouveaux blocs */
+@media (max-width: 768px) {
+    .tab-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    .discover-content {
+        align-items: stretch;
+    }
+    .discover-input {
+        width: 100%;
+    }
+}
+
+/* --- STYLE DES CHAMPS DE SAISIE INTERACTIFS --- */
+
+.custom-input {
+    background: transparent;
+    border: none;
+    color: #f5f5f5;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.custom-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+/* Petit effet lumineux quand on clique pour écrire */
+.custom-input:focus {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Rendre l'icône du calendrier blanche pour s'adapter au design */
+.custom-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Ajustements pour le menu déroulant (Select) */
+select.custom-input {
+    appearance: none; /* Cache la flèche par défaut du navigateur */
+    -webkit-appearance: none;
+    width: 110%; /* Laisse un peu de place au texte */
+}
+
+select.custom-input option {
+    color: #222; /* Le texte des options du menu doit être foncé pour être lisible */
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* --- BOUTON DE CONNEXION (NAVBAR) --- */
+
+.nav-links {
+    align-items: center; /* S'assure que le bouton est bien centré verticalement avec le texte */
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-weight: 500 !important; /* Un peu plus gras que les autres liens */
+    transition: all 0.3s ease;
+}
+
+/* Effet au survol : le bouton se remplit en blanc et le texte devient bleu */
+.btn-login:hover {
+    background-color: #fff;
+    color: var(--primary-blue) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* --- PAGE DE CONNEXION (LOGIN.PHP) --- */
+
+.login-page {
+    /* On réutilise ta belle image de fond du Hero */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Empêche de scroller sur la page de connexion */
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95); /* Blanc légèrement transparent */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.logo-login {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--primary-blue);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.login-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 8px rgba(28, 140, 183, 0.2);
+}
+
+.btn-login-submit {
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.login-footer {
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: #777;
+    transition: 0.3s;
+}
+
+.login-footer a:hover {
+    color: var(--primary-blue);
+}
+/* --- LIEN D'INSCRIPTION --- */
+.register-link {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+}
+
+.register-link a {
+    color: var(--primary-blue);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* On ajuste un peu l'espacement du footer pour que ça respire */
+.login-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+/* --- MENU UTILISATEUR (CONNECTÉ) --- */
+.user-menu-container {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px; /* Évite que le menu disparaisse quand on descend la souris */
+    margin-bottom: -15px;
+}
+
+.user-icon {
+    font-size: 26px !important; /* Le !important force cette taille en priorité absolue */
+    color: #fff;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.user-icon:hover {
+    color: var(--primary-blue);
+    transform: scale(1.1); 
+}
+.user-dropdown {
+    position: absolute;
+    top: 40px; /* Juste en dessous de l'icône */
+    right: 0;
+    background: #fff;
+    min-width: 220px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Fait apparaître le menu quand on survole le conteneur */
+.user-menu-container:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-name {
+    padding: 15px 20px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    background: #f8f9fa;
+    font-size: 14px;
+}
+
+.user-dropdown hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 0;
+}
+
+.user-dropdown a {
+    padding: 12px 20px;
+    color: #444;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.user-dropdown a:hover {
+    background: #f1f1f1;
+    color: var(--primary-blue);
+}
+
+/* Style spécial pour le bouton déconnexion en rouge */
+.user-dropdown .logout-btn {
+    color: #e53935;
+}
+
+.user-dropdown .logout-btn:hover {
+    background: #ffebee;
+    color: #d32f2f;
+}
+/* --- BOUTON DE RECHERCHE (LOUPE) POUR VOL ET HÔTEL --- */
+.search-btn-container {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.search-action-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Rend le bouton parfaitement rond */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    padding: 0; /* Annule le padding par défaut des boutons */
+    flex-shrink: 0; /* Empêche le bouton de s'écraser si l'écran est petit */
+    box-shadow: 0 8px 20px rgba(28, 140, 183, 0.4); /* Belle ombre bleue */
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 768px) {
+    .search-btn-container {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end; /* Place le bouton à droite sur téléphone */
+    }
+}
+/* --- PAGE PROFIL --- */
+.profile-page-bg {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.nav-profile {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* Avatar dans la navbar (remplace l'icône si l'utilisateur a une photo) */
+.nav-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+}
+
+.profile-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.profile-grid {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Colonne de gauche (Sidebar) */
+.profile-sidebar {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.avatar-section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.main-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--primary-blue);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Bouton pour upload la photo */
+input[type="file"]#file-upload {
+    display: none; /* Cache le bouton moche par défaut du navigateur */
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 15px;
+    cursor: pointer;
+    background: #f1f1f1;
+    color: #444;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 15px;
+    transition: 0.3s;
+    border: 1px solid #ddd;
+}
+
+.custom-file-upload:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.sidebar-info h3 {
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.sidebar-info p {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.btn-logout-sidebar {
+    display: block;
+    padding: 12px;
+    background: #ffebee;
+    color: #d32f2f;
+    border-radius: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-logout-sidebar:hover {
+    background: #ef5350;
+    color: white;
+}
+
+/* Colonne de droite (Formulaires) */
+.profile-content {
+    flex: 2;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.profile-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: var(--primary-blue);
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-form .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-form label {
+    font-weight: 600;
+    color: #555;
+}
+
+.profile-form input {
+    background: #f9f9f9; /* Légèrement grisé pour contraster avec le blanc */
+}
+
+.profile-divider {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+}
+
+/* Responsivité Mobile */
+@media (max-width: 768px) {
+    .profile-grid {
+        flex-direction: column;
+    }
+}
+/* --- NOTIFICATIONS (PANIER / VOYAGES) --- */
+.user-menu-container {
+    position: relative; /* Indispensable pour que le point rouge se place bien */
+}
+
+/* Le petit point rouge sur l'avatar */
+.notif-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background-color: #ff4757; /* Rouge vif */
+    border-radius: 50%;
+    border: 2px solid #fff; /* Petite bordure blanche pour détacher de l'image */
+    z-index: 10;
+}
+
+/* Le badge avec le numéro dans le menu déroulant */
+.notif-badge {
+    background-color: #ff4757;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-left: auto; /* Pousse le badge tout à droite de la ligne */
+    box-shadow: 0 2px 5px rgba(255, 71, 87, 0.4);
+}
+
+/* --- PAGE "MES VOYAGES" (PANIER) --- */
+/* --- PAGE "MES VOYAGES" (PANIER) - STYLE GLASSMORPHISM --- */
+.cart-page-bg {
+    /* Même fond majestueux que la page Profil */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.cart-container {
+    max-width: 900px;
+    margin: 40px auto;
+    
+    /* Le fameux effet "Verre Dépoli" (Glassmorphism) comme ta bulle de recherche */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    padding: 40px;
+    border-radius: 30px; /* Bords bien arrondis */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Petite bordure lumineuse */
+}
+
+.cart-title {
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(28, 140, 183, 0.2);
+    padding-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1); /* Ligne très discrète */
+    padding: 25px 0;
+    transition: background 0.3s ease;
+}
+
+/* Petit effet au survol du voyage */
+.cart-item:hover {
+    background: rgba(255,255,255,0.5);
+    border-radius: 15px;
+    padding: 25px 15px; /* Élargit un peu pour faire respirer */
+}
+
+.cart-item:last-child { border-bottom: none; }
+
+.cart-item img {
+    width: 140px; 
+    height: 90px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-right: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.cart-item-info { flex: 1; }
+.cart-item-title { font-weight: 700; font-size: 1.3rem; margin-bottom: 5px; color: #222; }
+.cart-item-price { font-weight: 700; font-size: 1.4rem; color: var(--primary-blue); margin-right: 30px; }
+
+.btn-remove {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.1); /* Fond rouge très léger */
+    padding: 12px 18px;
+    border-radius: 12px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-remove:hover { 
+    background: #ff4757; 
+    color: white; 
+    transform: scale(1.05);
+}
+
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(0,0,0,0.1);
+}
+
+.cart-total { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    color: #222;
+}
+
+.btn-pay {
+    background: linear-gradient(135deg, #2ed573, #26de81); /* Bouton vert moderne */
+    color: white;
+    padding: 18px 45px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3);
+}
+
+.btn-pay:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(46, 213, 115, 0.5);
+}
+
+.empty-cart { 
+    text-align: center; 
+    padding: 60px 0; 
+    color: #555; 
+}
+.cart-title {
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item img {
+    width: 120px; height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.cart-item-info { flex: 1; }
+.cart-item-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 5px; }
+.cart-item-price { font-weight: 700; font-size: 1.2rem; color: #222; margin-right: 30px; }
+.btn-remove {
+    color: #ff4757;
+    background: #ffeaa7;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.btn-remove:hover { background: #ff4757; color: white; }
+.cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+.cart-total { font-size: 1.8rem; font-weight: 700; }
+.btn-pay {
+    background: #2ed573;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-pay:hover {
+    background: #26de81;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(46, 213, 115, 0.4);
+}
+.empty-cart { text-align: center; padding: 50px 0; color: #777; }
+
+/* --- BOUTON DE RECHERCHE (FLÈCHE RONDE) --- */
+.search-btn-container {
+    margin-left: auto; /* Pousse le bouton tout à droite */
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    position: relative;
+    z-index: 50; /* Le place au-dessus de tout le reste pour qu'il soit cliquable ! */
+}
+
+.search-action-btn {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    background-color: #1C8CB7 !important; /* Bleu forcé */
+    color: #ffffff !important; /* Blanc forcé */
+    border: none !important; /* Enlève cette horrible bordure noire */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 22px !important;
+    cursor: pointer !important; /* La petite main apparaîtra */
+    box-shadow: 0 8px 20px rgba(28, 140, 183, 0.4) !important;
+    transition: all 0.3s ease !important;
+    flex-shrink: 0 !important;
+    pointer-events: auto !important; /* Force la possibilité de cliquer */
+}
+
+/* On force aussi l'icône à l'intérieur à être blanche */
+.search-action-btn i {
+    color: #ffffff !important;
+}
+
+.search-action-btn:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 10px 25px rgba(28, 140, 183, 0.6) !important;
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 768px) {
+    .search-btn-container {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+        padding-left: 0;
+    }
+}
+
+/* =========================================
+   ✨ OPTIMISATION MOBILE ULTIME ✨
+   ========================================= */
+/* =========================================
+   ✨ OPTIMISATION MOBILE ULTIME (CORRIGÉE) ✨
+   ========================================= */
+   
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1001; 
+}
+
+@media (max-width: 768px) {
+    
+    /* --- 1. CORRECTION DU DÉBORDEMENT (SCREEN RESIZING) --- */
+    .hero {
+        height: auto !important; /* Annule la limite stricte de hauteur */
+        min-height: 100vh; /* Garde au moins la taille de l'écran */
+        padding-bottom: 50px; /* Laisse de l'espace en bas de la bulle */
+    }
+
+    .hero-content {
+        margin-top: 50px !important; /* Remonte un peu le texte */
+        margin-bottom: 30px !important;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem !important; /* Réduit un peu le titre géant pour faire de la place */
+    }
+
+    .search-container {
+        position: relative !important; /* Arrête de flotter : pousse la page naturellement */
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 92% !important; /* Optimise la largeur pour tel */
+        margin: 0 auto !important; /* Centre parfaitement */
+    }
+
+    /* --- 2. FUSION ET DESIGN DE LA BULLE --- */
+    .search-inputs-bubble {
+        padding: 20px !important;
+        border-radius: 0 0 20px 20px !important; 
+        border-top: none !important; 
+        margin-top: 0 !important; 
+    }
+
+    .search-tabs {
+        justify-content: space-between !important;
+        padding: 10px !important;
+        gap: 5px;
+        border-radius: 20px 20px 0 0 !important; 
+        border-bottom: none !important; 
+    }
+
+    .search-tabs button {
+        flex: 1; 
+        justify-content: center;
+        padding: 10px 5px !important;
+        font-size: 13px !important;
+    }
+
+    .tab-content {
+        flex-direction: column !important;
+        align-items: stretch !important; 
+        gap: 12px !important;
+    }
+
+    .input-group {
+        width: 100% !important;
+        border-right: none !important; 
+        padding: 12px 20px !important;
+        background: rgba(0, 0, 0, 0.25) !important; /* Fond sombre élégant */
+        border-radius: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* Cache les ronds et traits inutiles sur tel */
+    .separator-icon,
+    .vertical-divider {
+        display: none !important;
+    }
+
+    /* Le bouton de recherche rectangulaire en bas */
+    .search-btn-container {
+        margin: 10px 0 0 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    .search-action-btn {
+        width: 100% !important; 
+        border-radius: 15px !important; 
+        height: 55px !important;
+    }
+	.menu-toggle {
+        display: block; /* Affiche les 3 barres */
+    }
+
+    nav {
+        flex-direction: row !important; /* Force le logo et le bouton sur la même ligne */
+        justify-content: space-between !important;
+        align-items: center !important;
+        position: relative; 
+    }
+
+    /* Le menu devient une magnifique plaque de verre flottante */
+    /* --- MENU FULL-SCREEN EFFET VERRE DÉPOLI --- */
+    .nav-links {
+        position: fixed !important; 
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important; /* Aligné en haut pour permettre le scroll */
+        align-items: center !important;
+        
+        background: rgba(0, 0, 0, 0.65) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        border: none !important;
+        border-radius: 0 !important;
+        
+        padding: 100px 20px 40px 20px !important; /* Espace en haut pour la croix */
+        gap: 25px !important;
+        
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease !important;
+        z-index: 1000;
+        
+        overflow-y: auto !important; /* LE SECRET : Permet de scroller DANS le menu ! */
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        font-size: 18px !important;
+        color: white !important;
+    }
+
+    /* La croix passe par-dessus et reste FIXE à l'écran quand le menu est ouvert */
+    .menu-toggle {
+        position: relative;
+        z-index: 1001; 
+    }
+    .menu-toggle.fixed-close {
+        position: fixed !important;
+        top: 30px;
+        right: 5%;
+    }
+
+    /* --- SOUS-MENU PROFIL (Adapté pour Mobile) --- */
+    .user-menu-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2); 
+        cursor: pointer; /* Montre qu'on peut taper dessus */
+    }
+
+    .user-name {
+        background: transparent !important;
+        color: white !important;
+        font-size: 18px !important;
+        padding: 0 !important;
+        margin-top: 10px;
+    }
+
+    /* Le sous-menu est CACHÉ par défaut */
+    .user-dropdown {
+        position: relative !important;
+        top: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        margin-top: 20px !important;
+        background: transparent !important; 
+        box-shadow: none !important;
+        display: none !important; /* On le cache ici */
+        opacity: 0 !important;
+        visibility: hidden !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Il s'affiche uniquement quand on ajoute la classe 'open' via JS */
+    .user-menu-container.open .user-dropdown {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .user-dropdown a {
+        font-size: 15px !important;
+        color: rgba(255, 255, 255, 0.8) !important;
+        padding: 10px !important;
+    }
+
+    .user-dropdown a:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 10px;
+        color: white !important;
+    }
+
+    .user-dropdown hr { display: none !important; }
+    .user-dropdown .logout-btn { color: #ff4757 !important; }
+  
+}
+
+/* --- STYLE SPÉCIFIQUE PAGE RÉSULTAT IA --- */
+.nav-subpage {
+    position: relative; /* Annule l'effet flottant de l'accueil */
+    background: transparent; 
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-subpage .nav-links a {
+    color: #333 !important; /* Force les liens en sombre */
+    font-weight: 500;
+}
+
+.nav-subpage .logo {
+    color: var(--primary-blue) !important;
+}
+
+.nav-subpage .menu-toggle i {
+    color: #333 !important;
+}
+
+/* Style du menu déroulant utilisateur */
+.nav-subpage .user-dropdown {
+    background: white !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.nav-subpage .user-dropdown a, 
+.nav-subpage .user-dropdown span {
+    color: #333 !important;
+}
+
+.nav-subpage .user-dropdown a:hover {
+    background: #f4f7f6 !important;
+}
+
+/* =========================================
+   STYLE SPÉCIFIQUE POUR LA PAGE RÉSULTAT IA
+   ========================================= */
+.header-ia {
+    background-color: transparent;
+    padding: 0;
+}
+
+/* On force les textes en gris foncé/bleu pour qu'ils soient lisibles sur fond clair */
+.header-ia .logo {
+    color: var(--primary-blue) !important;
+}
+
+.header-ia .nav-links a {
+    color: #333 !important;
+}
+
+.header-ia .nav-links a:hover {
+    color: var(--primary-blue) !important;
+}
+
+.header-ia .menu-toggle i {
+    color: #333 !important;
+}
+
+/* Adaptation du menu déroulant utilisateur (pour écraser le 'white' par défaut) */
+.header-ia .user-name {
+    color: #333 !important;
+}
+
+.header-ia .user-dropdown {
+    background: white !important;
+    border: 1px solid #eee;
+}
+
+.header-ia .user-dropdown a {
+    color: #555 !important;
+}
+
+.header-ia .user-dropdown a:hover {
+    background: #f4f7f6 !important;
+    color: var(--primary-blue) !important;
+}
