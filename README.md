@@ -36,3 +36,6 @@ Users can describe their dream trip in natural language and receive a completely
 1. **Clone the repository** into your `htdocs` folder (or equivalent):
    ```bash
    git clone https://github.com/ton-utilisateur/evasion-ai-travel-planner.git evasion
+
+2. **Import the database** Create a database named ``evasion` in MySQL , then import the povided SQL dump :
+   
